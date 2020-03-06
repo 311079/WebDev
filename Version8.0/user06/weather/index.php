@@ -1,7 +1,7 @@
 <?php
-$apiKey = "API KEY"; //You will need to add in the 
+$apiKey = "786b49dc14395da9c79a6b788828e525"; //You will need to add in the 
 $cityId = "5046997"; //5046997 Shakopee City Id
-$units = "metric";//metric-Celcius  imperial-Farhenheit
+$units = "imperial";//metric-Celcius  imperial-Farhenheit
 if ($units == 'metric'){//Changes the $temp varaible to match 
     $temp = "C";
 }
@@ -23,6 +23,14 @@ $response = curl_exec($ch);
 curl_close($ch);
 $data = json_decode($response);
 $currentTime = time();
+
+if ($data->main->temp_max >= 32)
+{
+    $color="blue";
+}
+else{
+    $color="red"; 
+}
 ?>
 
 <!doctype html>
@@ -69,7 +77,7 @@ span.min-temperature {
 
 </head>
 <body>
-
+<?php echo $color ?>
     <div class="report-container">
         <h2><?php echo $data->name; ?> Weather Status</h2>
         <div class="time">
